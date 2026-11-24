@@ -16,7 +16,7 @@ export async function POST(request) {
   const session = await getSession();
   if (!session) return Response.json({ error: "Unauthorized" }, { status: 401 });
 
-  const { title, description, priority } = await request.json();
+  const { title, description, priority, category } = await request.json();
   if (!title || !description) {
     return Response.json({ error: "Title and description required" }, { status: 400 });
   }
@@ -26,6 +26,7 @@ export async function POST(request) {
     title,
     description,
     priority,
+    category,
     createdBy: session.id,
     createdByName: session.name,
   });
